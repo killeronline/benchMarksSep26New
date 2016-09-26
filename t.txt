@@ -1,0 +1,113 @@
+//Rextester.Program.Main is the entry point for your code. Don't change it.
+//Compiler version 4.0.30319.17929 for Microsoft (R) .NET Framework 4.5
+
+using System;
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.Linq;
+using System.Text.RegularExpressions;
+
+namespace Rextester
+{
+    public class Program
+    {
+        public static void Main(string[] args)
+        {
+            Stopwatch sw = new Stopwatch();
+            //-----------------------------------------A U T O - I N P
+            string totalInput = string.Empty;
+            int Inputs = 1000 ;
+            for ( int i = 0 ; i < Inputs ; i++ )
+            {
+                Random rand = new Random(Guid.NewGuid().GetHashCode());
+                int R = rand.Next(5,10);
+                int C = rand.Next(10,20) ;
+                totalInput += string.Format("{0} {1}\n",R,C);
+                for ( int r = 0 ; r < R ; r++ )
+                {
+                    string row = string.Empty;
+                    for ( int c = 0 ; c < C ; c++)
+                    {
+                        row += rand.Next(1,1000) ;
+                        if ( c < C-1 )
+                        {
+                            row += " ";
+                        }
+                    }                    
+                    totalInput += row + "\n" ;
+                }
+            }                            
+            // Inputs > R C > R X C > Numbers        
+            //Console.WriteLine(totalInput);
+            sw.Start();
+            //------------------------------------------S T A R T   
+            
+            // approach 1 : read data line by line and split it into array and convert them accordingly(int)
+            /*
+            int[,] result = new int[1,1];
+            int m = -1 ;
+            string[] Lines = totalInput.Split('\n');
+            foreach ( string row in Lines )
+            {
+                if ( ! string.IsNullOrEmpty( row.Trim() ))
+                {                    
+                    string[] sRC = row.Split();                           
+                    if ( sRC.Length == 2 )
+                    {                    
+                        int R = Convert.ToInt32( sRC[0] );
+                        int C = Convert.ToInt32( sRC[1] );
+                        result = new int[R,C];
+                        m = 0 ;
+                        //Console.WriteLine( row );
+                    }
+                    else
+                    {                    
+                        for ( int j = 0 ; j < sRC.Length ; j++ )
+                        {                                         
+                            result[m,j] = Convert.ToInt32( sRC[j] );                                                                                                                       
+                        }                                        
+                        m++;
+                    }
+                }
+            }// 40 milli seconds
+            */
+            
+            // approach 2 : read byte by byte till space and convert accordingly as array are pure arrays
+            
+            int[,] result = new int[1,1];
+            int m = -1 ;
+            for ( char c in totalInputs )
+            {
+                
+            }
+
+            //------------------------------------------F I N I S H
+            sw.Stop();                        
+            long microseconds = sw.ElapsedTicks / (Stopwatch.Frequency / (1000L*1000L));                        
+            Console.WriteLine("Operation completed in: " + microseconds + " (us)");            
+        }
+    }
+}
+
+/*
+
+            int N = 100000 ;// Primes Count
+            int p = 0 ;
+            for ( int i = 3 ; i < N ; i++)
+            {
+                int f = 0 ;
+                for ( int j = 2 ; j < (i/2)+1 ; j++ )
+                {
+                    if ( i % j == 0 )
+                    {
+                        f++;
+                        break;
+                    }
+                }             
+                if ( f == 0 )
+                {
+                    p++;
+                }
+            }      
+            
+*/
